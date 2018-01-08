@@ -14,18 +14,27 @@ using System.Linq;
 using UnityEngine;
 using UnityEditor;
 using OranUnityUtils;
-
+using UnityEditor.SceneManagement;
 
 [InitializeOnLoad]
 public class AutoAttributeManagerEditor : UnityEditor.AssetModificationProcessor
 {
 	private static void MakeSureAutoManagerIsInScene()
 	{
-		var autoManager = GameObject.FindObjectOfType<AutoAttributeManager>();
-		if (autoManager == null)
+		var autoManagers = GameObject.FindObjectsOfType<AutoAttributeManager>();
+		if (autoManagers.IsNullOrEmpty())
 		{
 			GameObject autoGo = new GameObject("Auto_Attribute_Manager");
 			autoGo.AddComponent<AutoAttributeManager>();
+			EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+		}
+		else if (autoManagers.Length >=2)
+		{
+			for(int i=1; i<autoManagers.Length; i++)
+			{
+				GameObject.DestroyImmediate(autoManagers[i]);
+			}
+			EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
 		}
 	}
 
@@ -33,11 +42,5 @@ public class AutoAttributeManagerEditor : UnityEditor.AssetModificationProcessor
 	{
 		MakeSureAutoManagerIsInScene();
 		return paths;
-	}
-
-	[UnityEditor.Callbacks.DidReloadScripts]
-	private static void OnScriptsReload()
-	{
-		MakeSureAutoManagerIsInScene();
 	}
 }
