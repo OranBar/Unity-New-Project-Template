@@ -336,3 +336,12 @@ MonoBehaviour:
     Background: {fileID: 0}
     IsBackgroundRecursive: 0
     IsBackgroundCustom: 0
+  - Type: 1
+    Key: Assets/Pixelplacement/SurgeTestScenes
+    SmallIcon: {fileID: 2800000, guid: 40ff06f7c381dcf4391ca8342d04260c, type: 3}
+    LargeIcon: {fileID: 2800000, guid: f9d86cd8e960f584a9aa5a8ee61c4115, type: 3}
+    IsIconRecursive: 0
+    IsIconCustom: 0
+    Background: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsBackgroundCustom: 0
