@@ -1,14 +1,4 @@
-﻿/*======= Copyright (c) Immerxive Srl, All rights reserved. ===================
-
- Author: 
-
- Purpose: 
- 
- Notes: 
-
-=============================================================================*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;					 
 using UnityEngine;

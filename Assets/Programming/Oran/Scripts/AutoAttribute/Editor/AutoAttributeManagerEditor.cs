@@ -1,19 +1,5 @@
-﻿/*======= Copyright (c) Immerxive Srl, All rights reserved. ===================
-
-Author: Oran Bar
-
-Purpose: 
-
-Notes:
-
-=============================================================================*/
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
-using OranUnityUtils;
 using UnityEditor.SceneManagement;
 
 [InitializeOnLoad]

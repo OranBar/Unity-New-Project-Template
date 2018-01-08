@@ -1,12 +1,3 @@
-//======= Copyright (c) Immerxive Srl, All rights reserved. ===================
-//
-// Author: Oran Bar
-//
-// Purpose: To make your life easier
-//
-// Notes:
-//
-//=============================================================================
 using System;
 using System.Collections;
 using UnityEngine;

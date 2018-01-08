@@ -1,19 +1,9 @@
-﻿//======= Copyright (c) Immerxive Srl, All rights reserved. ===================
-//
-// Author: Oran Bar
-//
-// Purpose: To make your life easier
-//
-// Notes:
-//
-//=============================================================================
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using System;
 using System.Linq;
 using OranUnityUtils;
-using UnityEngine.SceneManagement;
 using SceneManager = UnityEngine.SceneManagement.SceneManager;
 
 public static class GameObjectEx

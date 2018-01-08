@@ -1,16 +1,4 @@
-﻿/*
-======= Copyright (c) Immerxive Srl, All rights reserved. ===================
-
- Author: Rwin
-
- Purpose: 
-
- Notes:
-
-=============================================================================
-*/
-
-using UnityEngine;
+﻿using UnityEngine;
 
 public static class MathfEx
 {

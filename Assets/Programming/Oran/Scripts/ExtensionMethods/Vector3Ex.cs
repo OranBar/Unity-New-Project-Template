@@ -1,13 +1,4 @@
-﻿/*======= Copyright (c) Immerxive Srl, All rights reserved. ===================
-
- Author: Oran Bar
-
- Purpose: 
-
- Notes: 
-
-=============================================================================*/
-using UnityEngine;				
+﻿using UnityEngine;				
 		  
 namespace OranUnityUtils {
 

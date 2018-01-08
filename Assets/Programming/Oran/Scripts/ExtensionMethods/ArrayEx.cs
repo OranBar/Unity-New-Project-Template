@@ -1,17 +1,4 @@
-﻿/*======= Copyright (c) Immerxive Srl, All rights reserved. ===================
-
-Author: Oran Bar
-
-Purpose: 
-
-Notes:
-
-=============================================================================*/
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using System;
 
 public static class ArrayEx
 { 
