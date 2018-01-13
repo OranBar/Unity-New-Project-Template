@@ -25,7 +25,7 @@ using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
 
 
-[ScriptOrder(-1000)]
+[ScriptTiming(-1000)]
 public class AutoAttributeManager : MonoBehaviour
 {
 

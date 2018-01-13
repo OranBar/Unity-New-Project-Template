@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[ScriptOrder(-900)]
+[ScriptTiming(-900)]
 public class AutoReferencerOnInstantiation : MonoBehaviour {
 
     public bool alsoReferenceChildren = true;
