@@ -50,7 +50,7 @@ public static class DebugEx
 
 	#region Logging Helpers
 	#region Tag Logic
-	public static void AssignTagToType(this MonoBehaviour mb, string tag)
+	public static void RegisterTag(this MonoBehaviour mb, string tag)
 	{
 		typeToTag[mb.GetType()] = "[" + tag + "] ";
 	}
@@ -83,35 +83,35 @@ public static class DebugEx
 	#endregion
 
 	#region Log
-	public static void LogTagged<T>(this T mb, object message) where T : MonoBehaviour
+	public static void Log<T>(this T mb, object message) where T : MonoBehaviour
 	{
 		message = ApplyTagIfTagWasAssigned<T>(message);
 
 		Debug.Log(message, mb.gameObject);
 	}
 
-	public static void LogFormatTagged<T>(this T mb, string format, params string[] args) where T : MonoBehaviour
+	public static void LogFormat<T>(this T mb, string format, params string[] args) where T : MonoBehaviour
 	{
 		format = ApplyTagIfTagWasAssigned<T>(format);
 
 		Debug.LogFormat(mb.gameObject, format, args);
 	}
 
-	public static void LogWarningTagged<T>(this T mb, object message) where T : MonoBehaviour
+	public static void LogWarning<T>(this T mb, object message) where T : MonoBehaviour
 	{
 		message = ApplyTagIfTagWasAssigned<T>(message);
 
 		Debug.LogWarning(message, mb.gameObject);
 	}
 
-	public static void LogWarningFormatTagged<T>(this T mb, string format, params string[] args) where T : MonoBehaviour
+	public static void LogWarningFormat<T>(this T mb, string format, params string[] args) where T : MonoBehaviour
 	{
 		format = ApplyTagIfTagWasAssigned<T>(format);
 
 		Debug.LogWarningFormat(mb.gameObject, format, args);
 	}
 
-	public static void LogErrorTagged<T>(this T mb, object message) where T : MonoBehaviour
+	public static void LogError<T>(this T mb, object message) where T : MonoBehaviour
 	{
 		message = ApplyTagIfTagWasAssigned<T>(message);
 		//For now we'll keep it like that. We'd need a way of knowing if we
@@ -119,7 +119,7 @@ public static class DebugEx
 		Debug.LogError(message, mb.gameObject);
 	}
 
-	public static void LogErrorFormatTagged<T>(this T mb, string format, params string[] args) where T : MonoBehaviour
+	public static void LogErrorFormat<T>(this T mb, string format, params string[] args) where T : MonoBehaviour
 	{
 		format = ApplyTagIfTagWasAssigned<T>(format);
 
