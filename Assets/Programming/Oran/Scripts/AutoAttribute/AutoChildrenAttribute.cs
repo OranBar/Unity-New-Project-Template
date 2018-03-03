@@ -25,6 +25,8 @@ using UnityEngine;
 public class AutoChildrenAttribute : Attribute, IAutoAttribute
 {
 	private const string MonoBehaviourNameColor = "green";
+	private static ReflectionHelperMethods Rhm = new ReflectionHelperMethods();
+
 
 	private bool logErrorIfMissing = true;
 
@@ -43,8 +45,8 @@ public class AutoChildrenAttribute : Attribute, IAutoAttribute
 	public void Execute(MonoBehaviour mb, Type componentType, Action<MonoBehaviour, object> SetVariableType)
 	{
 		GameObject go = mb.gameObject;
-		
-		if (componentType.IsArray)
+
+		if (componentType.IsArray || Rhm.IsList(componentType))
 		{
 			MultipleComponentAssignment(mb, go, componentType, SetVariableType);
 		}
@@ -88,146 +90,14 @@ public class AutoChildrenAttribute : Attribute, IAutoAttribute
 		if (componentType.IsArray)
 		{
 			SetVariable(mb, componentsToReference);
-			//field.SetValue(mb, componentsToReference);
 		}
-		//else if (field.FieldType.IsGenericType && field.FieldType.GetGenericTypeDefinition() == typeof(List<>))
-		//{
-		//	List<Component> list = new List<Component>(componentsToReference);
-		//	var argTypes = new[]
-		//	{
-		//		(IEnumerable<Component>) componentsToReference
-		//	};
-
-		//	var listType = typeof(List<>);
-		//	var constructedListType = listType.MakeGenericType(componentType);
-
-		//	var componentList = Activator.CreateInstance(constructedListType, argTypes);
-
-		//	field.SetValue(mb, componentList);
-		//}
+		else if (Rhm.IsList(componentType))
+		{
+			SetVariable(mb, Enumerable.ToList(componentsToReference));
+		}
 	}
 
-	//public void Execute(MonoBehaviour mb, FieldInfo field)
-	//{
-	//	GameObject go = mb.gameObject;
-
-	//	Type componentType = field.FieldType;
-
-	//	if (componentType.IsArray)
-	//	{
-	//		MultipleComponentAssignment(mb, field, go, componentType);
-	//	}
-	//	else
-	//	{
-	//		field.SetValue(mb, mb.GetComponentInChildren(componentType, true));
-	//	}
-	//}
-
-	//private void MultipleComponentAssignment(MonoBehaviour mb, FieldInfo field, GameObject go, Type componentType) 
-	//{
-	//	Type listElementType = GetElementType(field.FieldType);
-
-	//	MethodInfo method = typeof(GameObject).GetMethods()
-	//		//.Where(m => m.Name == "GetComponentsInChildren")
-	//		.First(m =>
-	//		{
-	//			bool result = true;
-	//			result = result && m.Name == "GetComponentsInChildren";
-	//			result = result && m.IsGenericMethod;
-	//			result = result && m.GetParameters().Length == 1;
-	//			result = result && m.GetParameters()[0].ParameterType == typeof(bool);
-	//			return result;
-	//		});
-	//	//we want to pass true as arg, to get from inactive objs too
-	//	MethodInfo generic = method.MakeGenericMethod(listElementType);
-	//	dynamic componentsToReference = generic.Invoke(go, new object[] { true });
-
-	//	if (componentsToReference.Length == 0)
-	//	{
-	//		if (logErrorIfMissing)
-	//		{
-	//			Debug.LogError(
-	//				string.Format("[Auto]: <color={3}><b>{1}</b></color> couldn't find any components <color=#cc3300><b>{0}</b></color> on <color=#e68a00>{2}.</color>",
-	//					componentType.Name, mb.GetType().Name, go.name, MonoBehaviourNameColor)
-	//				, go);
-	//		}
-	//		return;
-	//	}
-
-	//	if (field.FieldType.IsArray)
-	//	{
-	//		field.SetValue(mb, componentsToReference);
-	//	}
-	//	//else if (field.FieldType.IsGenericType && field.FieldType.GetGenericTypeDefinition() == typeof(List<>))
-	//	//{
-	//	//	List<Component> list = new List<Component>(componentsToReference);
-	//	//	var argTypes = new[]
-	//	//	{
-	//	//		(IEnumerable<Component>) componentsToReference
-	//	//	};
-
-	//	//	var listType = typeof(List<>);
-	//	//	var constructedListType = listType.MakeGenericType(componentType);
-
-	//	//	var componentList = Activator.CreateInstance(constructedListType, argTypes);
-
-	//	//	field.SetValue(mb, componentList);
-	//	//}
-	//}
-
-	//public void Execute(MonoBehaviour mb, PropertyInfo prop)
-	//{
-	//	GameObject go = mb.gameObject;
-
-	//	Type componentType = prop.PropertyType;
-
-	//	if (componentType.IsArray)
-	//	{
-	//		MultipleComponentAssignment(mb, prop, go, componentType);
-	//	}
-	//	else
-	//	{
-	//		prop.SetValue(mb, mb.GetComponentInChildren(componentType, true));
-	//	}
-	//}
-
-	//private void MultipleComponentAssignment(MonoBehaviour mb, PropertyInfo prop, GameObject go, Type componentType)
-	//{
-	//	Type listElementType = GetElementType(prop.PropertyType);
-
-	//	MethodInfo method = typeof(GameObject).GetMethods()
-	//		//.Where(m => m.Name == "GetComponentsInChildren")
-	//		.First(m =>
-	//		{
-	//			bool result = true;
-	//			result = result && m.Name == "GetComponentsInChildren";
-	//			result = result && m.IsGenericMethod;
-	//			result = result && m.GetParameters().Length == 1;
-	//			result = result && m.GetParameters()[0].ParameterType == typeof(bool);
-	//			return result;
-	//		});
-	//	//we want to pass true as arg, to get from inactive objs too
-	//	MethodInfo generic = method.MakeGenericMethod(listElementType);
-	//	dynamic componentsToReference = generic.Invoke(go, new object[] { true });
-
-	//	if (componentsToReference.Length == 0)
-	//	{
-	//		if (logErrorIfMissing)
-	//		{
-	//			Debug.LogError(
-	//				string.Format("[Auto]: <color={3}><b>{1}</b></color> couldn't find any components <color=#cc3300><b>{0}</b></color> on <color=#e68a00>{2}.</color>",
-	//					componentType.Name, mb.GetType().Name, go.name, MonoBehaviourNameColor)
-	//				, go);
-	//		}
-	//		return;
-	//	}
-
-	//	if (prop.PropertyType.IsArray)
-	//	{
-	//		prop.SetValue(mb, componentsToReference, null);
-	//	}
-	//}
-
+	
 }
 
 public static class AutoUtils

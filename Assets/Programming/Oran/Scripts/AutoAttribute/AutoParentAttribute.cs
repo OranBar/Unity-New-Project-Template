@@ -16,6 +16,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
@@ -24,6 +25,7 @@ using UnityEngine;
 public class AutoParentAttribute : Attribute, IAutoAttribute
 {
 	private const string MonoBehaviourNameColor = "green";
+	private static ReflectionHelperMethods Rhm = new ReflectionHelperMethods();
 
 	private bool logErrorIfMissing = true;
 
@@ -43,7 +45,7 @@ public class AutoParentAttribute : Attribute, IAutoAttribute
 	{
 		GameObject go = mb.gameObject;
 
-		if (componentType.IsArray)
+		if (componentType.IsArray || Rhm.IsList(componentType))
 		{
 			MultipleComponentAssignment(mb, go, componentType, SetVariableType);
 		}
@@ -88,8 +90,10 @@ public class AutoParentAttribute : Attribute, IAutoAttribute
 			SetVariable(mb, componentsToReference);
 			//field.SetValue(mb, componentsToReference);
 		}
-		//else if (field.FieldType.IsGenericType && field.FieldType.GetGenericTypeDefinition() == typeof(List<>))
-		//{
+		else if (Rhm.IsList(componentType))
+		{
+			SetVariable(mb, componentsToReference.ToList());
+		}
 		//	List<Component> list = new List<Component>(componentsToReference);
 		//	var argTypes = new[]
 		//	{
