@@ -56,7 +56,7 @@ public class AutoAttributeManager : MonoBehaviour
 				var currentReferenceValue = field.GetValue(targetMb);
 				if (currentReferenceValue == null || currentReferenceValue.Equals(null))
 				{
-					autofind.Execute(targetMb, field);
+					autofind.Execute(targetMb, field.FieldType, (mb, val)=>field.SetValue(mb, val));
 				}
 			}
 		}
@@ -71,7 +71,7 @@ public class AutoAttributeManager : MonoBehaviour
 				var currentReferenceValue = prop.GetValue(targetMb, null);
 				if (currentReferenceValue == null || currentReferenceValue.Equals(null))
 				{
-					autofind.Execute(targetMb, prop);
+					autofind.Execute(targetMb, prop.PropertyType, (mb, val)=>prop.SetValue(mb, val));
 				}
 			}
 		}
