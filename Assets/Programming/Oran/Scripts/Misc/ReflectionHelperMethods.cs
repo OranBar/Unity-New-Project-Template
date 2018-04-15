@@ -167,6 +167,11 @@ public class ReflectionHelperMethods  {
 		return variableType.IsValueType && (variableType.IsPrimitive == false && variableType.IsEnum == false);
 	}
 
+	public bool IsList(Type componentType)
+	{
+		return componentType.IsGenericType && componentType.GetGenericTypeDefinition() == typeof(List<>);
+	}
+
 	public bool IsReferenceType(MemberInfo memberInfo)
 	{
 		var variableType = GetVariableType(memberInfo);

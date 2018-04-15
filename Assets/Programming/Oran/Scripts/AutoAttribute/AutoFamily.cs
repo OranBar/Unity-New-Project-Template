@@ -57,7 +57,6 @@ public abstract class AutoFamily : Attribute, IAutoAttribute
 		Type listElementType = AutoUtils.GetElementType(componentType);
 
 		MethodInfo method = typeof(GameObject).GetMethods()
-			//.Where(m => m.Name == "GetComponentsInChildren")
 			.First(m =>
 			{
 				bool result = true;
