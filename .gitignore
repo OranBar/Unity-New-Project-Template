@@ -33,3 +33,5 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+Assets/WebPlayerTemplates/
+Assets/Programming/Oran/_Roba/
